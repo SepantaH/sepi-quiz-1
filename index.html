@@ -4,609 +4,1718 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>تعیین سطح | گویش ملل</title>
+
+    <!-- ================= فونت ================= -->
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;900&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <!-- ================= CSS ================= -->
 
     <style>
-        *{ margin:0; padding:0; box-sizing:border-box; font-family:"Vazirmatn",sans-serif; }
 
-        body{
-            background:#FFF8F0;
-            color:#333;
-            line-height:1.8;
+        /* =========================================================
+           تنظیمات عمومی
+        ========================================================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Vazirmatn", sans-serif;
         }
 
-        .container{ width:90%; max-width:1200px; margin:auto; }
-
-        /* ========================= صفحه آزمون ========================= */
-
-        .test-page{
-            min-height:100vh;
-            padding:60px 20px 100px;
-            position:relative;
-            overflow:hidden;
-            display:flex;
-            align-items:center;
-            justify-content:center;
+        body {
+            background: #FFF8F0;
+            color: #333;
+            line-height: 1.8;
         }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+
+        /* =========================================================
+           صفحه اصلی آزمون
+        ========================================================= */
+
+        .test-page {
+            min-height: 100vh;
+            padding: 60px 20px 100px;
+
+            position: relative;
+            overflow: hidden;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+
+        /* ---------- دایره‌های تزئینی پس‌زمینه ---------- */
 
         .test-page::before,
-        .test-page::after{
-            content:"";
-            position:absolute;
-            border-radius:50%;
-            z-index:0;
+        .test-page::after {
+            content: "";
+            position: absolute;
+            border-radius: 50%;
+            z-index: 0;
         }
 
-        .test-page::before{
-            width:480px; height:480px;
-            background:radial-gradient(circle, rgba(142,47,168,.1), transparent 70%);
-            top:-160px; right:-160px;
+        .test-page::before {
+            width: 480px;
+            height: 480px;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(142, 47, 168, .1),
+                    transparent 70%
+                );
+
+            top: -160px;
+            right: -160px;
         }
 
-        .test-page::after{
-            width:420px; height:420px;
-            background:radial-gradient(circle, rgba(212,175,55,.14), transparent 70%);
-            bottom:-140px; left:-140px;
+        .test-page::after {
+            width: 420px;
+            height: 420px;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(212, 175, 55, .14),
+                    transparent 70%
+                );
+
+            bottom: -140px;
+            left: -140px;
         }
 
-        .test-wrapper{
-            position:relative;
-            z-index:1;
-            width:100%;
-            max-width:700px;
+
+        /* ---------- ظرف اصلی ---------- */
+
+        .test-wrapper {
+            position: relative;
+            z-index: 1;
+
+            width: 100%;
+            max-width: 700px;
         }
 
-        /* ---------- کارت‌ها ---------- */
+
+        /* =========================================================
+           کارت‌های آزمون
+        ========================================================= */
 
         .start-card,
         .quiz-card,
-        .result-card{
-            background:white;
-            border-radius:26px;
-            padding:55px 45px;
-            box-shadow:0 25px 60px rgba(142,47,168,.15);
+        .result-card {
+            background: white;
+
+            border-radius: 26px;
+
+            padding: 55px 45px;
+
+            box-shadow:
+                0 25px 60px rgba(142, 47, 168, .15);
         }
 
         .start-card,
-        .result-card{ text-align:center; }
+        .result-card {
+            text-align: center;
+        }
+
+
+        /* =========================================================
+           صفحه شروع
+        ========================================================= */
 
         .start-icon,
-        .result-icon{ font-size:52px; margin-bottom:18px; }
-
-        .start-card h1{
-            font-size:28px;
-            font-weight:900;
-            color:#3a1046;
-            margin-bottom:14px;
+        .result-icon {
+            font-size: 52px;
+            margin-bottom: 18px;
         }
 
-        .start-card h1 span{ color:#8E2FA8; }
+        .start-card h1 {
+            font-size: 28px;
+            font-weight: 900;
 
-        .start-card p{
-            color:#777;
-            font-size:15px;
-            max-width:480px;
-            margin:0 auto 30px;
+            color: #3a1046;
+
+            margin-bottom: 14px;
         }
 
-        .start-meta{
-            display:flex;
-            justify-content:center;
-            gap:30px;
-            margin-bottom:30px;
-            flex-wrap:wrap;
+        .start-card h1 span {
+            color: #8E2FA8;
         }
 
-        .start-meta div{ text-align:center; }
+        .start-card p {
+            color: #777;
+            font-size: 15px;
 
-        .start-meta b{
-            display:block;
-            font-size:20px;
-            color:#8E2FA8;
-            font-weight:900;
+            max-width: 480px;
+
+            margin: 0 auto 30px;
         }
 
-        .start-meta span{ font-size:12.5px; color:#999; }
 
-        /* ---------- فیلد نام ---------- */
+        /* ---------- اطلاعات آزمون ---------- */
 
-        .name-field{
-            margin-bottom:28px;
-            text-align:right;
+        .start-meta {
+            display: flex;
+            justify-content: center;
+
+            gap: 30px;
+
+            margin-bottom: 30px;
+
+            flex-wrap: wrap;
         }
 
-        .name-field label{
-            display:block;
-            font-size:14px;
-            font-weight:700;
-            color:#3a1046;
-            margin-bottom:8px;
+        .start-meta div {
+            text-align: center;
         }
 
-        .name-field input{
-            width:100%;
-            padding:14px 18px;
-            border:2px solid #eee;
-            border-radius:14px;
-            font-family:inherit;
-            font-size:15px;
-            transition:.25s;
-            outline:none;
+        .start-meta b {
+            display: block;
+
+            font-size: 20px;
+
+            color: #8E2FA8;
+
+            font-weight: 900;
         }
 
-        .name-field input:focus{
-            border-color:#8E2FA8;
-            background:rgba(142,47,168,.03);
+        .start-meta span {
+            font-size: 12.5px;
+            color: #999;
         }
 
-        .name-error{
-            color:#c63c3c;
-            font-size:13px;
-            margin-top:6px;
-            display:none;
+
+        /* =========================================================
+           فیلد نام
+        ========================================================= */
+
+        .name-field {
+            margin-bottom: 28px;
+            text-align: right;
         }
 
-        /* ---------- دکمه‌ها ---------- */
+        .name-field label {
+            display: block;
 
-        .btn-start{
-            display:inline-block;
-            border:none;
-            cursor:pointer;
-            font-family:inherit;
-            padding:16px 50px;
-            background:#8E2FA8;
-            color:white;
-            border-radius:40px;
-            font-size:15.5px;
-            font-weight:700;
-            transition:.3s;
+            font-size: 14px;
+            font-weight: 700;
+
+            color: #3a1046;
+
+            margin-bottom: 8px;
         }
 
-        .btn-start:hover{
-            background:#D4AF37;
-            transform:translateY(-4px);
-            box-shadow:0 12px 25px rgba(212,175,55,.35);
+        .name-field input {
+            width: 100%;
+
+            padding: 14px 18px;
+
+            border: 2px solid #eee;
+            border-radius: 14px;
+
+            font-family: inherit;
+            font-size: 15px;
+
+            transition: .25s;
+
+            outline: none;
         }
 
-        .btn-start:disabled{
-            opacity:.5;
-            cursor:not-allowed;
-            transform:none;
-            background:#8E2FA8;
-            box-shadow:none;
+        .name-field input:focus {
+            border-color: #8E2FA8;
+
+            background:
+                rgba(142, 47, 168, .03);
         }
 
-        /* ---------- کوییز ---------- */
+        .name-error {
+            color: #c63c3c;
 
-        .progress-info{
-            display:flex;
-            justify-content:space-between;
-            align-items:center;
-            margin-bottom:12px;
-            font-size:13px;
-            color:#8E2FA8;
-            font-weight:700;
+            font-size: 13px;
+
+            margin-top: 6px;
+
+            display: none;
         }
 
-        .progress-track{
-            width:100%;
-            height:8px;
-            background:#f1e6f5;
-            border-radius:10px;
-            overflow:hidden;
-            margin-bottom:30px;
+
+        /* =========================================================
+           دکمه شروع
+        ========================================================= */
+
+        .btn-start {
+            display: inline-block;
+
+            border: none;
+            cursor: pointer;
+
+            font-family: inherit;
+
+            padding: 16px 50px;
+
+            background: #8E2FA8;
+            color: white;
+
+            border-radius: 40px;
+
+            font-size: 15.5px;
+            font-weight: 700;
+
+            transition: .3s;
         }
 
-        .progress-fill{
-            height:100%;
-            width:5%;
-            background:linear-gradient(90deg,#8E2FA8,#D4AF37);
-            border-radius:10px;
-            transition:width .4s ease;
+        .btn-start:hover {
+            background: #D4AF37;
+
+            transform: translateY(-4px);
+
+            box-shadow:
+                0 12px 25px rgba(212, 175, 55, .35);
         }
 
-        .q-difficulty{
-            display:inline-block;
-            font-size:11.5px;
-            font-weight:700;
-            padding:4px 14px;
-            border-radius:20px;
-            margin-bottom:16px;
+        .btn-start:disabled {
+            opacity: .5;
+
+            cursor: not-allowed;
+
+            transform: none;
+
+            background: #8E2FA8;
+
+            box-shadow: none;
         }
 
-        .q-difficulty.easy{ background:rgba(46,160,90,.12); color:#2ea05a; }
-        .q-difficulty.medium{ background:rgba(212,175,55,.15); color:#a3821c; }
-        .q-difficulty.hard{ background:rgba(198,60,60,.1); color:#c63c3c; }
 
-        .q-text{
-            font-size:19px;
-            font-weight:700;
-            color:#3a1046;
-            margin-bottom:26px;
-            min-height:60px;
+        /* =========================================================
+           نوار پیشرفت آزمون
+        ========================================================= */
+
+        .progress-info {
+            display: flex;
+
+            justify-content: space-between;
+            align-items: center;
+
+            margin-bottom: 12px;
+
+            font-size: 13px;
+
+            color: #8E2FA8;
+
+            font-weight: 700;
         }
 
-        .q-options{
-            display:flex;
-            flex-direction:column;
-            gap:12px;
-            margin-bottom:34px;
+        .progress-track {
+            width: 100%;
+            height: 8px;
+
+            background: #f1e6f5;
+
+            border-radius: 10px;
+
+            overflow: hidden;
+
+            margin-bottom: 30px;
         }
 
-        .q-option{
-            display:flex;
-            align-items:center;
-            gap:14px;
-            border:2px solid #eee;
-            border-radius:14px;
-            padding:14px 18px;
-            cursor:pointer;
-            transition:.25s;
-            font-size:14.5px;
-            text-align:right;
+        .progress-fill {
+            height: 100%;
+            width: 5%;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #8E2FA8,
+                    #D4AF37
+                );
+
+            border-radius: 10px;
+
+            transition: width .4s ease;
         }
 
-        .q-option:hover{
-            border-color:#D4AF37;
-            background:rgba(212,175,55,.05);
+
+        /* =========================================================
+           سطح سختی سؤال
+        ========================================================= */
+
+        .q-difficulty {
+            display: inline-block;
+
+            font-size: 11.5px;
+            font-weight: 700;
+
+            padding: 4px 14px;
+
+            border-radius: 20px;
+
+            margin-bottom: 16px;
         }
 
-        .q-option.selected{
-            border-color:#8E2FA8;
-            background:rgba(142,47,168,.06);
+        .q-difficulty.easy {
+            background: rgba(46, 160, 90, .12);
+            color: #2ea05a;
         }
 
-        .q-option .letter{
-            width:28px;
-            height:28px;
-            min-width:28px;
-            border-radius:50%;
-            background:#f1e6f5;
-            color:#8E2FA8;
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            font-weight:700;
-            font-size:13px;
-            transition:.25s;
+        .q-difficulty.medium {
+            background: rgba(212, 175, 55, .15);
+            color: #a3821c;
         }
 
-        .q-option.selected .letter{
-            background:#8E2FA8;
-            color:white;
+        .q-difficulty.hard {
+            background: rgba(198, 60, 60, .1);
+            color: #c63c3c;
         }
 
-        .quiz-nav{
-            display:flex;
-            justify-content:space-between;
-            gap:14px;
+
+        /* =========================================================
+           متن سؤال
+        ========================================================= */
+
+        .q-text {
+            font-size: 19px;
+
+            font-weight: 700;
+
+            color: #3a1046;
+
+            margin-bottom: 26px;
+
+            min-height: 60px;
         }
 
-        .quiz-nav button{
-            flex:1;
-            border:none;
-            cursor:pointer;
-            font-family:inherit;
-            padding:14px;
-            border-radius:14px;
-            font-size:14.5px;
-            font-weight:700;
-            transition:.3s;
+
+        /* =========================================================
+           گزینه‌های سؤال
+        ========================================================= */
+
+        .q-options {
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 12px;
+
+            margin-bottom: 34px;
         }
 
-        .btn-prev{ background:#f4f4f4; color:#666; }
-        .btn-prev:hover{ background:#eaeaea; }
-        .btn-prev:disabled{ opacity:.4; cursor:not-allowed; }
+        .q-option {
+            display: flex;
 
-        .btn-next{ background:#8E2FA8; color:white; }
-        .btn-next:hover:not(:disabled){ background:#D4AF37; }
-        .btn-next:disabled{ opacity:.45; cursor:not-allowed; }
+            align-items: center;
 
-        /* ---------- نتیجه ---------- */
+            gap: 14px;
 
-        .result-card h2{
-            font-size:24px;
-            font-weight:900;
-            color:#3a1046;
-            margin-bottom:10px;
+            border: 2px solid #eee;
+
+            border-radius: 14px;
+
+            padding: 14px 18px;
+
+            cursor: pointer;
+
+            transition: .25s;
+
+            font-size: 14.5px;
+
+            text-align: right;
         }
 
-        .result-card p{
-            color:#888;
-            font-size:14.5px;
-            margin-bottom:28px;
+        .q-option:hover {
+            border-color: #D4AF37;
+
+            background:
+                rgba(212, 175, 55, .05);
         }
 
-        .result-score{
-            display:inline-block;
-            background:rgba(142,47,168,.08);
-            color:#8E2FA8;
-            font-weight:800;
-            font-size:22px;
-            padding:14px 36px;
-            border-radius:20px;
-            margin-bottom:10px;
+        .q-option.selected {
+            border-color: #8E2FA8;
+
+            background:
+                rgba(142, 47, 168, .06);
         }
 
-        .result-level{
-            display:inline-block;
-            background:rgba(212,175,55,.15);
-            color:#a3821c;
-            font-weight:800;
-            font-size:15px;
-            padding:8px 22px;
-            border-radius:20px;
-            margin-bottom:10px;
+
+        /* ---------- دایره A/B/C/D ---------- */
+
+        .q-option .letter {
+            width: 28px;
+            height: 28px;
+
+            min-width: 28px;
+
+            border-radius: 50%;
+
+            background: #f1e6f5;
+
+            color: #8E2FA8;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            font-weight: 700;
+
+            font-size: 13px;
+
+            transition: .25s;
         }
 
-        .hidden{ display:none !important; }
+        .q-option.selected .letter {
+            background: #8E2FA8;
 
-        @media (max-width:600px){
+            color: white;
+        }
+
+
+        /* =========================================================
+           دکمه‌های جابه‌جایی سؤال
+        ========================================================= */
+
+        .quiz-nav {
+            display: flex;
+
+            justify-content: space-between;
+
+            gap: 14px;
+        }
+
+        .quiz-nav button {
+            flex: 1;
+
+            border: none;
+
+            cursor: pointer;
+
+            font-family: inherit;
+
+            padding: 14px;
+
+            border-radius: 14px;
+
+            font-size: 14.5px;
+
+            font-weight: 700;
+
+            transition: .3s;
+        }
+
+        .btn-prev {
+            background: #f4f4f4;
+            color: #666;
+        }
+
+        .btn-prev:hover {
+            background: #eaeaea;
+        }
+
+        .btn-prev:disabled {
+            opacity: .4;
+
+            cursor: not-allowed;
+        }
+
+        .btn-next {
+            background: #8E2FA8;
+            color: white;
+        }
+
+        .btn-next:hover:not(:disabled) {
+            background: #D4AF37;
+        }
+
+        .btn-next:disabled {
+            opacity: .45;
+
+            cursor: not-allowed;
+        }
+
+
+        /* =========================================================
+           صفحه نتیجه
+        ========================================================= */
+
+        .result-card h2 {
+            font-size: 24px;
+
+            font-weight: 900;
+
+            color: #3a1046;
+
+            margin-bottom: 10px;
+        }
+
+        .result-card p {
+            color: #888;
+
+            font-size: 14.5px;
+
+            margin-bottom: 28px;
+        }
+
+        .result-score {
+            display: inline-block;
+
+            background:
+                rgba(142, 47, 168, .08);
+
+            color: #8E2FA8;
+
+            font-weight: 800;
+
+            font-size: 22px;
+
+            padding: 14px 36px;
+
+            border-radius: 20px;
+
+            margin-bottom: 10px;
+        }
+
+        .result-level {
+            display: inline-block;
+
+            background:
+                rgba(212, 175, 55, .15);
+
+            color: #a3821c;
+
+            font-weight: 800;
+
+            font-size: 15px;
+
+            padding: 8px 22px;
+
+            border-radius: 20px;
+
+            margin-bottom: 10px;
+        }
+
+
+        /* =========================================================
+           کلاس مخفی
+        ========================================================= */
+
+        .hidden {
+            display: none !important;
+        }
+
+
+        /* =========================================================
+           نسخه موبایل
+        ========================================================= */
+
+        @media (max-width: 600px) {
+
             .start-card,
             .quiz-card,
-            .result-card{ padding:34px 24px; }
-            .q-text{ font-size:17px; }
+            .result-card {
+                padding: 34px 24px;
+            }
+
+            .q-text {
+                font-size: 17px;
+            }
         }
+
     </style>
+
 </head>
+
 
 <body>
 
+
+    <!-- =========================================================
+         iframe مخفی
+         
+         برای ارسال اطلاعات به Google Apps Script استفاده می‌شود.
+         چون درخواست از GitHub Pages به Google انجام می‌شود،
+         این روش نیازی به دریافت پاسخ با fetch ندارد.
+    ========================================================= -->
+
+    <iframe
+        name="googleSheetFrame"
+        id="googleSheetFrame"
+        style="display:none;">
+    </iframe>
+
+
+    <!-- =========================================================
+         صفحه اصلی آزمون
+    ========================================================= -->
+
     <section class="test-page">
+
         <div class="test-wrapper">
 
-            <!-- ---------- مرحله ۱: صفحه شروع + نام ---------- -->
+
+            <!-- =====================================================
+                 مرحله ۱: صفحه شروع
+            ===================================================== -->
+
             <div class="start-card" id="startScreen">
 
-                <div class="start-icon">📝</div>
+                <div class="start-icon">
+                    📝
+                </div>
 
-                <h1>سطح <span>زبانت</span> رو پیدا کن</h1>
+                <h1>
+                    سطح <span>زبانت</span> رو پیدا کن
+                </h1>
 
                 <p>
-                    با پاسخ به ۲۰ سوال چهارگزینه‌ای که از آسون شروع می‌شه و کم‌کم سخت‌تر می‌شه،
-                    سطح فعلی زبان انگلیسیت مشخص می‌شه.
+                    با پاسخ به ۲۰ سوال چهارگزینه‌ای که از آسون شروع می‌شه
+                    و کم‌کم سخت‌تر می‌شه، سطح فعلی زبان انگلیسیت مشخص می‌شه.
                 </p>
 
+
+                <!-- ---------- اطلاعات آزمون ---------- -->
+
                 <div class="start-meta">
-                    <div><b>۲۰</b><span>سوال</span></div>
-                    <div><b>~۱۰</b><span>دقیقه</span></div>
-                    <div><b>۴</b><span>گزینه هر سوال</span></div>
+
+                    <div>
+                        <b>۲۰</b>
+                        <span>سوال</span>
+                    </div>
+
+                    <div>
+                        <b>~۱۰</b>
+                        <span>دقیقه</span>
+                    </div>
+
+                    <div>
+                        <b>۴</b>
+                        <span>گزینه هر سوال</span>
+                    </div>
+
                 </div>
 
-                <!-- فیلد نام -->
+
+                <!-- ---------- نام کاربر ---------- -->
+
                 <div class="name-field">
-                    <label for="userName">نام خود را وارد کنید:</label>
-                    <input type="text" id="userName" placeholder="مثلاً: Ali" autocomplete="off">
-                    <div class="name-error" id="nameError">لطفاً نام خود را وارد کنید.</div>
+
+                    <label for="userName">
+                        نام خود را وارد کنید:
+                    </label>
+
+                    <input
+                        type="text"
+                        id="userName"
+                        placeholder="مثلاً: Ali"
+                        autocomplete="off"
+                    >
+
+                    <div
+                        class="name-error"
+                        id="nameError"
+                    >
+                        لطفاً نام خود را وارد کنید.
+                    </div>
+
                 </div>
 
-                <button class="btn-start" id="btnStart" onclick="startTest()" disabled>شروع آزمون</button>
+
+                <!-- ---------- شروع آزمون ---------- -->
+
+                <button
+                    class="btn-start"
+                    id="btnStart"
+                    onclick="startTest()"
+                    disabled
+                >
+                    شروع آزمون
+                </button>
 
             </div>
 
-            <!-- ---------- مرحله ۲: کوییز ---------- -->
-            <div class="quiz-card hidden" id="quizScreen">
+
+
+            <!-- =====================================================
+                 مرحله ۲: آزمون
+            ===================================================== -->
+
+            <div
+                class="quiz-card hidden"
+                id="quizScreen"
+            >
+
+                <!-- ---------- اطلاعات پیشرفت ---------- -->
 
                 <div class="progress-info">
-                    <span id="progressLabel">سوال ۱ از ۲۰</span>
-                    <span id="progressPercent">۵٪</span>
+
+                    <span id="progressLabel">
+                        سوال ۱ از ۲۰
+                    </span>
+
+                    <span id="progressPercent">
+                        ۵٪
+                    </span>
+
                 </div>
+
+
+                <!-- ---------- نوار پیشرفت ---------- -->
 
                 <div class="progress-track">
-                    <div class="progress-fill" id="progressFill"></div>
+
+                    <div
+                        class="progress-fill"
+                        id="progressFill"
+                    ></div>
+
                 </div>
 
-                <span class="q-difficulty" id="qDifficulty">آسان</span>
 
-                <div class="q-text" id="qText"></div>
+                <!-- ---------- سختی سؤال ---------- -->
 
-                <div class="q-options" id="qOptions"></div>
+                <span
+                    class="q-difficulty"
+                    id="qDifficulty"
+                >
+                    آسان
+                </span>
+
+
+                <!-- ---------- متن سؤال ---------- -->
+
+                <div
+                    class="q-text"
+                    id="qText"
+                ></div>
+
+
+                <!-- ---------- گزینه‌ها ---------- -->
+
+                <div
+                    class="q-options"
+                    id="qOptions"
+                ></div>
+
+
+                <!-- ---------- دکمه‌های جابه‌جایی ---------- -->
 
                 <div class="quiz-nav">
-                    <button class="btn-prev" id="btnPrev" onclick="prevQuestion()">سوال قبل</button>
-                    <button class="btn-next" id="btnNext" onclick="nextQuestion()" disabled>سوال بعد</button>
+
+                    <button
+                        class="btn-prev"
+                        id="btnPrev"
+                        onclick="prevQuestion()"
+                    >
+                        سوال قبل
+                    </button>
+
+                    <button
+                        class="btn-next"
+                        id="btnNext"
+                        onclick="nextQuestion()"
+                        disabled
+                    >
+                        سوال بعد
+                    </button>
+
                 </div>
 
             </div>
 
-            <!-- ---------- مرحله ۳: نتیجه ---------- -->
-            <div class="result-card hidden" id="resultScreen">
 
-                <div class="result-icon">🎯</div>
 
-                <h2>آزمون با موفقیت تکمیل شد</h2>
-                <p id="resultGreeting">نتیجه شما در حال پردازشه...</p>
+            <!-- =====================================================
+                 مرحله ۳: نتیجه
+            ===================================================== -->
 
-                <div class="result-score" id="resultScore">۰ از ۱۰۰</div>
+            <div
+                class="result-card hidden"
+                id="resultScreen"
+            >
+
+                <div class="result-icon">
+                    🎯
+                </div>
+
+                <h2>
+                    آزمون با موفقیت تکمیل شد
+                </h2>
+
+                <p id="resultGreeting">
+                    نتیجه شما در حال پردازشه...
+                </p>
+
+                <div
+                    class="result-score"
+                    id="resultScore"
+                >
+                    ۰ از ۱۰۰
+                </div>
+
                 <br>
-                <div class="result-level" id="resultLevel">سطح: --</div>
+
+                <div
+                    class="result-level"
+                    id="resultLevel"
+                >
+                    سطح: --
+                </div>
 
             </div>
 
         </div>
+
     </section>
 
+
+
     <!-- =========================================================
-         فرم مخفی Netlify - پاسخ‌ها اینجا ذخیره می‌شن
+         JavaScript
     ========================================================= -->
-    <form name="placement-test" method="POST" data-netlify="true" id="netlifyForm" class="hidden">
-        <input type="hidden" name="form-name" value="placement-test" />
-        <input type="hidden" name="userName" id="nfUserName" />
-        <input type="hidden" name="score100" id="nfScore" />
-        <input type="hidden" name="level" id="nfLevel" />
-        <input type="hidden" name="answers" id="nfAnswers" />
-        <input type="hidden" name="correctCount" id="nfCorrect" />
-        <input type="hidden" name="submittedAt" id="nfTime" />
-    </form>
 
     <script>
 
+
+        /* =========================================================
+           آدرس Google Apps Script
+           
+           این همان Web App URL است که از Google Apps Script
+           دریافت کردی.
+        ========================================================= */
+
+        const GOOGLE_SHEET_URL =
+            "https://script.google.com/macros/s/AKfycbxm-x4wdNtRLDn7i4uWONCTR4-oXltWjLgNkAPubzTwvC-JZmH5drbWMSE_tq7EHdWB/exec";
+
+
+
+        /* =========================================================
+           سؤالات آزمون
+        ========================================================= */
+
         const questions = [
-            { difficulty:"easy", text:"She ___ a teacher.", options:["is","am","are","be"], correct:0 },
-            { difficulty:"easy", text:"They ___ from Iran.", options:["is","am","are","be"], correct:2 },
-            { difficulty:"easy", text:"I ___ two brothers.", options:["has","have","having","haves"], correct:1 },
-            { difficulty:"easy", text:"This is ___ book.", options:["a","an","the","-"], correct:0 },
-            { difficulty:"easy", text:"What ___ your name?", options:["is","are","do","does"], correct:0 },
-            { difficulty:"easy", text:"He ___ to school every day.", options:["go","goes","going","gone"], correct:1 },
-            { difficulty:"easy", text:"Choose the correct plural: one child, two ___", options:["childs","childes","children","child"], correct:2 },
-            { difficulty:"medium", text:"I ___ my homework when you called.", options:["do","did","was doing","have done"], correct:2 },
-            { difficulty:"medium", text:"She has lived here ___ 2015.", options:["for","since","from","at"], correct:1 },
-            { difficulty:"medium", text:"If it rains, we ___ stay home.", options:["will","would","were","had"], correct:0 },
-            { difficulty:"medium", text:"This book is ___ than that one.", options:["interesting","more interesting","most interesting","interestinger"], correct:1 },
-            { difficulty:"medium", text:"He asked me ___ I was busy.", options:["that","if","what","so"], correct:1 },
-            { difficulty:"medium", text:"By the time we arrived, the movie ___ already started.", options:["has","had","was","is"], correct:1 },
-            { difficulty:"medium", text:"Choose the correct sentence:", options:["He don't like coffee.","He doesn't likes coffee.","He doesn't like coffee.","He not like coffee."], correct:2 },
-            { difficulty:"hard", text:"Hardly ___ the meeting started when the fire alarm rang.", options:["had","has","did","was"], correct:0 },
-            { difficulty:"hard", text:"She would have come to the party if she ___ invited.", options:["was","were","had been","has been"], correct:2 },
-            { difficulty:"hard", text:"The report, ___ conclusions were questioned, was rewritten.", options:["that","which","whose","who"], correct:2 },
-            { difficulty:"hard", text:"Choose the closest meaning to 'reluctant':", options:["eager","unwilling","confident","careless"], correct:1 },
-            { difficulty:"hard", text:"No sooner ___ the door than the phone rang.", options:["I opened","had I opened","I had opened","did I open"], correct:1 },
-            { difficulty:"hard", text:"Choose the correct idiom: 'to cost an arm and a leg' means:", options:["to be very cheap","to be very expensive","to take a long time","to be dangerous"], correct:1 },
+
+            {
+                difficulty: "easy",
+                text: "She ___ a teacher.",
+                options: ["is", "am", "are", "be"],
+                correct: 0
+            },
+
+            {
+                difficulty: "easy",
+                text: "They ___ from Iran.",
+                options: ["is", "am", "are", "be"],
+                correct: 2
+            },
+
+            {
+                difficulty: "easy",
+                text: "I ___ two brothers.",
+                options: ["has", "have", "having", "haves"],
+                correct: 1
+            },
+
+            {
+                difficulty: "easy",
+                text: "This is ___ book.",
+                options: ["a", "an", "the", "-"],
+                correct: 0
+            },
+
+            {
+                difficulty: "easy",
+                text: "What ___ your name?",
+                options: ["is", "are", "do", "does"],
+                correct: 0
+            },
+
+            {
+                difficulty: "easy",
+                text: "He ___ to school every day.",
+                options: ["go", "goes", "going", "gone"],
+                correct: 1
+            },
+
+            {
+                difficulty: "easy",
+                text: "Choose the correct plural: one child, two ___",
+                options: ["childs", "childes", "children", "child"],
+                correct: 2
+            },
+
+            {
+                difficulty: "medium",
+                text: "I ___ my homework when you called.",
+                options: ["do", "did", "was doing", "have done"],
+                correct: 2
+            },
+
+            {
+                difficulty: "medium",
+                text: "She has lived here ___ 2015.",
+                options: ["for", "since", "from", "at"],
+                correct: 1
+            },
+
+            {
+                difficulty: "medium",
+                text: "If it rains, we ___ stay home.",
+                options: ["will", "would", "were", "had"],
+                correct: 0
+            },
+
+            {
+                difficulty: "medium",
+                text: "This book is ___ than that one.",
+                options: [
+                    "interesting",
+                    "more interesting",
+                    "most interesting",
+                    "interestinger"
+                ],
+                correct: 1
+            },
+
+            {
+                difficulty: "medium",
+                text: "He asked me ___ I was busy.",
+                options: ["that", "if", "what", "so"],
+                correct: 1
+            },
+
+            {
+                difficulty: "medium",
+                text: "By the time we arrived, the movie ___ already started.",
+                options: ["has", "had", "was", "is"],
+                correct: 1
+            },
+
+            {
+                difficulty: "medium",
+                text: "Choose the correct sentence:",
+                options: [
+                    "He don't like coffee.",
+                    "He doesn't likes coffee.",
+                    "He doesn't like coffee.",
+                    "He not like coffee."
+                ],
+                correct: 2
+            },
+
+            {
+                difficulty: "hard",
+                text: "Hardly ___ the meeting started when the fire alarm rang.",
+                options: ["had", "has", "did", "was"],
+                correct: 0
+            },
+
+            {
+                difficulty: "hard",
+                text: "She would have come to the party if she ___ invited.",
+                options: ["was", "were", "had been", "has been"],
+                correct: 2
+            },
+
+            {
+                difficulty: "hard",
+                text: "The report, ___ conclusions were questioned, was rewritten.",
+                options: ["that", "which", "whose", "who"],
+                correct: 2
+            },
+
+            {
+                difficulty: "hard",
+                text: "Choose the closest meaning to 'reluctant':",
+                options: [
+                    "eager",
+                    "unwilling",
+                    "confident",
+                    "careless"
+                ],
+                correct: 1
+            },
+
+            {
+                difficulty: "hard",
+                text: "No sooner ___ the door than the phone rang.",
+                options: [
+                    "I opened",
+                    "had I opened",
+                    "I had opened",
+                    "did I open"
+                ],
+                correct: 1
+            },
+
+            {
+                difficulty: "hard",
+                text: "Choose the correct idiom: 'to cost an arm and a leg' means:",
+                options: [
+                    "to be very cheap",
+                    "to be very expensive",
+                    "to take a long time",
+                    "to be dangerous"
+                ],
+                correct: 1
+            }
+
         ];
 
+
+
+        /* =========================================================
+           متغیرهای اصلی آزمون
+        ========================================================= */
+
         let currentIndex = 0;
-        let userAnswers = new Array(questions.length).fill(null);
+
+        /*
+         * در این آرایه جواب انتخاب‌شده هر سؤال ذخیره می‌شود.
+         *
+         * مثال:
+         *
+         * userAnswers[0] = 1
+         *
+         * یعنی کاربر برای سؤال اول گزینه B را انتخاب کرده.
+         */
+
+        let userAnswers =
+            new Array(questions.length).fill(null);
+
+
+        /*
+         * نام شرکت‌کننده
+         */
+
         let userName = "";
 
-        const difficultyLabels = { easy:"آسان", medium:"متوسط", hard:"سخت" };
 
-        // ---------- فعال/غیرفعال کردن دکمه شروع بر اساس نام ----------
-        document.getElementById("userName").addEventListener("input", function() {
-            const val = this.value.trim();
-            document.getElementById("btnStart").disabled = val.length < 2;
-            document.getElementById("nameError").style.display = "none";
-        });
+        /*
+         * ترجمه سطح سختی سؤال
+         */
+
+        const difficultyLabels = {
+            easy: "آسان",
+            medium: "متوسط",
+            hard: "سخت"
+        };
+
+
+        /*
+         * حروف گزینه‌ها
+         */
+
+        const answerLetters = [
+            "A",
+            "B",
+            "C",
+            "D"
+        ];
+
+
+
+        /* =========================================================
+           فعال / غیرفعال کردن دکمه شروع
+           
+           تا زمانی که حداقل دو کاراکتر وارد نشده باشد،
+           دکمه شروع فعال نمی‌شود.
+        ========================================================= */
+
+        document
+            .getElementById("userName")
+            .addEventListener("input", function () {
+
+                const value =
+                    this.value.trim();
+
+                const startButton =
+                    document.getElementById("btnStart");
+
+                const nameError =
+                    document.getElementById("nameError");
+
+                startButton.disabled =
+                    value.length < 2;
+
+                nameError.style.display =
+                    "none";
+
+            });
+
+
+
+        /* =========================================================
+           شروع آزمون
+        ========================================================= */
 
         function startTest() {
-            userName = document.getElementById("userName").value.trim();
+
+            userName =
+                document
+                    .getElementById("userName")
+                    .value
+                    .trim();
+
+
+            /*
+             * بررسی نام
+             */
 
             if (userName.length < 2) {
-                document.getElementById("nameError").style.display = "block";
+
+                document
+                    .getElementById("nameError")
+                    .style.display = "block";
+
                 return;
             }
 
-            document.getElementById("startScreen").classList.add("hidden");
-            document.getElementById("quizScreen").classList.remove("hidden");
+
+            /*
+             * مخفی کردن صفحه شروع
+             */
+
+            document
+                .getElementById("startScreen")
+                .classList
+                .add("hidden");
+
+
+            /*
+             * نمایش صفحه آزمون
+             */
+
+            document
+                .getElementById("quizScreen")
+                .classList
+                .remove("hidden");
+
+
+            /*
+             * نمایش سؤال اول
+             */
 
             renderQuestion();
         }
+
+
+
+        /* =========================================================
+           نمایش سؤال فعلی
+        ========================================================= */
 
         function renderQuestion() {
-            const q = questions[currentIndex];
 
-            const percent = Math.round(((currentIndex + 1) / questions.length) * 100);
-            document.getElementById("progressFill").style.width = percent + "%";
-            document.getElementById("progressPercent").textContent = percent + "٪";
-            document.getElementById("progressLabel").textContent =
+            const question =
+                questions[currentIndex];
+
+
+            /*
+             * محاسبه درصد پیشرفت
+             */
+
+            const percent =
+                Math.round(
+                    ((currentIndex + 1) / questions.length) * 100
+                );
+
+
+            document
+                .getElementById("progressFill")
+                .style.width =
+                percent + "%";
+
+
+            document
+                .getElementById("progressPercent")
+                .textContent =
+                percent + "٪";
+
+
+            document
+                .getElementById("progressLabel")
+                .textContent =
                 `سوال ${currentIndex + 1} از ${questions.length}`;
 
-            const diffEl = document.getElementById("qDifficulty");
-            diffEl.textContent = difficultyLabels[q.difficulty];
-            diffEl.className = "q-difficulty " + q.difficulty;
 
-            document.getElementById("qText").textContent = q.text;
 
-            const optionsEl = document.getElementById("qOptions");
-            const letters = ["A","B","C","D"];
+            /* ---------- نمایش سختی سؤال ---------- */
 
-            optionsEl.innerHTML = q.options.map((opt, i) => `
-                <div class="q-option ${userAnswers[currentIndex] === i ? "selected" : ""}"
-                     onclick="selectOption(${i})">
-                    <span class="letter">${letters[i]}</span>
-                    <span>${opt}</span>
-                </div>
-            `).join("");
+            const difficultyElement =
+                document.getElementById("qDifficulty");
 
-            document.getElementById("btnPrev").disabled = currentIndex === 0;
+            difficultyElement.textContent =
+                difficultyLabels[question.difficulty];
 
-            const nextBtn = document.getElementById("btnNext");
-            nextBtn.disabled = userAnswers[currentIndex] === null;
-            nextBtn.textContent = currentIndex === questions.length - 1 ? "مشاهده نتیجه" : "سوال بعد";
+            difficultyElement.className =
+                "q-difficulty " +
+                question.difficulty;
+
+
+
+            /* ---------- نمایش متن سؤال ---------- */
+
+            document
+                .getElementById("qText")
+                .textContent =
+                question.text;
+
+
+
+            /* ---------- ساخت گزینه‌ها ---------- */
+
+            const optionsElement =
+                document.getElementById("qOptions");
+
+
+            optionsElement.innerHTML =
+                question.options
+                    .map((option, index) => {
+
+                        const selected =
+                            userAnswers[currentIndex] === index
+                                ? "selected"
+                                : "";
+
+                        return `
+                            <div
+                                class="q-option ${selected}"
+                                onclick="selectOption(${index})"
+                            >
+
+                                <span class="letter">
+                                    ${answerLetters[index]}
+                                </span>
+
+                                <span>
+                                    ${option}
+                                </span>
+
+                            </div>
+                        `;
+
+                    })
+                    .join("");
+
+
+
+            /* ---------- دکمه سؤال قبل ---------- */
+
+            document
+                .getElementById("btnPrev")
+                .disabled =
+                currentIndex === 0;
+
+
+
+            /* ---------- دکمه سؤال بعد ---------- */
+
+            const nextButton =
+                document.getElementById("btnNext");
+
+            nextButton.disabled =
+                userAnswers[currentIndex] === null;
+
+
+            /*
+             * در سؤال آخر متن دکمه تغییر می‌کند.
+             */
+
+            nextButton.textContent =
+                currentIndex === questions.length - 1
+                    ? "مشاهده نتیجه"
+                    : "سوال بعد";
         }
 
+
+
+        /* =========================================================
+           انتخاب گزینه
+        ========================================================= */
+
         function selectOption(index) {
-            userAnswers[currentIndex] = index;
+
+            userAnswers[currentIndex] =
+                index;
+
             renderQuestion();
         }
 
+
+
+        /* =========================================================
+           رفتن به سؤال بعد
+        ========================================================= */
+
         function nextQuestion() {
-            if (userAnswers[currentIndex] === null) return;
+
+            /*
+             * اگر کاربر جوابی انتخاب نکرده باشد،
+             * اجازه رفتن به سؤال بعد را نمی‌دهیم.
+             */
+
+            if (userAnswers[currentIndex] === null) {
+                return;
+            }
+
+
+            /*
+             * اگر هنوز به سؤال آخر نرسیده‌ایم،
+             * برو به سؤال بعد.
+             */
 
             if (currentIndex < questions.length - 1) {
+
                 currentIndex++;
+
                 renderQuestion();
-            } else {
+
+            }
+
+            /*
+             * اگر سؤال آخر است،
+             * آزمون را تمام کن.
+             */
+
+            else {
+
                 finishTest();
             }
         }
 
+
+
+        /* =========================================================
+           برگشت به سؤال قبل
+        ========================================================= */
+
         function prevQuestion() {
+
             if (currentIndex > 0) {
+
                 currentIndex--;
+
                 renderQuestion();
             }
         }
 
-        // ---------- محاسبه سطح بر اساس نمره ----------
+
+
+        /* =========================================================
+           محاسبه سطح زبان
+        ========================================================= */
+
         function calculateLevel(score100) {
-            if (score100 >= 85) return "Advanced (C1)";
-            if (score100 >= 70) return "Upper-Intermediate (B2)";
-            if (score100 >= 55) return "Intermediate (B1)";
-            if (score100 >= 40) return "Pre-Intermediate (A2)";
-            if (score100 >= 20) return "Elementary (A1)";
+
+            if (score100 >= 85) {
+                return "Advanced (C1)";
+            }
+
+            if (score100 >= 70) {
+                return "Upper-Intermediate (B2)";
+            }
+
+            if (score100 >= 55) {
+                return "Intermediate (B1)";
+            }
+
+            if (score100 >= 40) {
+                return "Pre-Intermediate (A2)";
+            }
+
+            if (score100 >= 20) {
+                return "Elementary (A1)";
+            }
+
             return "Beginner";
         }
 
+
+
+        /* =========================================================
+           پایان آزمون
+           
+           این تابع:
+           
+           1. تعداد جواب‌های صحیح را محاسبه می‌کند.
+           2. نمره را از 100 محاسبه می‌کند.
+           3. سطح را مشخص می‌کند.
+           4. نتیجه را روی صفحه نمایش می‌دهد.
+           5. اطلاعات را به Google Sheets ارسال می‌کند.
+        ========================================================= */
+
         function finishTest() {
+
+
+            /* =====================================================
+               محاسبه تعداد پاسخ‌های صحیح
+            ===================================================== */
+
             let correctCount = 0;
-            questions.forEach((q, i) => {
-                if (userAnswers[i] === q.correct) correctCount++;
+
+
+            questions.forEach((question, index) => {
+
+                if (
+                    userAnswers[index] ===
+                    question.correct
+                ) {
+
+                    correctCount++;
+                }
+
             });
 
-            const score100 = Math.round((correctCount / questions.length) * 100);
-            const level = calculateLevel(score100);
 
-            // نمایش نتیجه
-            document.getElementById("quizScreen").classList.add("hidden");
-            document.getElementById("resultScreen").classList.remove("hidden");
 
-            document.getElementById("resultGreeting").textContent =
+            /* =====================================================
+               محاسبه نمره از 100
+            ===================================================== */
+
+            const score100 =
+                Math.round(
+                    (correctCount / questions.length) * 100
+                );
+
+
+
+            /* =====================================================
+               تعیین سطح
+            ===================================================== */
+
+            const level =
+                calculateLevel(score100);
+
+
+
+            /* =====================================================
+               نمایش نتیجه به کاربر
+            ===================================================== */
+
+            document
+                .getElementById("quizScreen")
+                .classList
+                .add("hidden");
+
+
+            document
+                .getElementById("resultScreen")
+                .classList
+                .remove("hidden");
+
+
+            document
+                .getElementById("resultGreeting")
+                .textContent =
                 `${userName} عزیز، نتیجه شما آماده است:`;
-            document.getElementById("resultScore").textContent = `${score100} از ۱۰۰`;
-            document.getElementById("resultLevel").textContent = `سطح: ${level}`;
 
-            // پر کردن فرم مخفی Netlify
-            const answersText = questions.map((q, i) => {
-                const chosen = userAnswers[i] !== null ? userAnswers[i] : "-";
-                const isCorrect = userAnswers[i] === q.correct ? "✓" : "✗";
-                return `Q${i+1}: انتخاب ${chosen} | صحیح ${q.correct} ${isCorrect}`;
-            }).join(" || ");
 
-            document.getElementById("nfUserName").value = userName;
-            document.getElementById("nfScore").value = score100;
-            document.getElementById("nfLevel").value = level;
-            document.getElementById("nfAnswers").value = answersText;
-            document.getElementById("nfCorrect").value = `${correctCount}/${questions.length}`;
-            document.getElementById("nfTime").value = new Date().toLocaleString("fa-IR");
+            document
+                .getElementById("resultScore")
+                .textContent =
+                `${score100} از ۱۰۰`;
 
-            // ارسال به Netlify
-            const form = document.getElementById("netlifyForm");
-            const formData = new FormData(form);
 
-            fetch("/", {
-                method: "POST",
-                headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                body: new URLSearchParams(formData).toString()
-            })
-            .then(() => console.log("✅ پاسخ‌ها با موفقیت ذخیره شد"))
-            .catch(err => console.error("❌ خطا در ذخیره:", err));
+            document
+                .getElementById("resultLevel")
+                .textContent =
+                `سطح: ${level}`;
+
+
+
+            /* =====================================================
+               ارسال اطلاعات به Google Sheets
+               
+               برای هر سؤال یک ستون جداگانه داریم:
+               
+               Q1
+               Q2
+               Q3
+               ...
+               Q20
+            ===================================================== */
+
+
+            /*
+             * ساخت یک فرم موقت
+             */
+
+            const submitForm =
+                document.createElement("form");
+
+
+            submitForm.method =
+                "POST";
+
+
+            submitForm.action =
+                GOOGLE_SHEET_URL;
+
+
+            /*
+             * فرم به iframe مخفی ارسال می‌شود.
+             *
+             * این کار باعث می‌شود صفحه آزمون
+             * به صفحه Google منتقل نشود.
+             */
+
+            submitForm.target =
+                "googleSheetFrame";
+
+
+            submitForm.style.display =
+                "none";
+
+
+
+            /* =====================================================
+               تابع کمکی برای ساخت فیلد مخفی
+            ===================================================== */
+
+            function addField(name, value) {
+
+                const input =
+                    document.createElement("input");
+
+                input.type =
+                    "hidden";
+
+                input.name =
+                    name;
+
+                input.value =
+                    value;
+
+                submitForm.appendChild(input);
+            }
+
+
+
+            /* =====================================================
+               اطلاعات اصلی شرکت‌کننده
+            ===================================================== */
+
+            addField(
+                "name",
+                userName
+            );
+
+
+            addField(
+                "score",
+                score100
+            );
+
+
+            addField(
+                "level",
+                level
+            );
+
+
+
+            /* =====================================================
+               ذخیره پاسخ سؤال‌های 1 تا 20
+               
+               مثال:
+               
+               Q1 → B - am
+               Q2 → C - are
+               Q3 → B - have
+               
+               بنابراین داخل Sheet فقط A/B/C/D نمی‌بینی،
+               بلکه متن گزینه را هم خواهی داشت.
+            ===================================================== */
+
+            questions.forEach((question, index) => {
+
+                const selectedAnswer =
+                    userAnswers[index];
+
+
+                /*
+                 * اگر پاسخی انتخاب شده باشد
+                 */
+
+                if (selectedAnswer !== null) {
+
+                    const answerText =
+                        `${answerLetters[selectedAnswer]} - ${question.options[selectedAnswer]}`;
+
+
+                    addField(
+                        `q${index + 1}`,
+                        answerText
+                    );
+
+                }
+
+                /*
+                 * در صورت نبودن پاسخ
+                 */
+
+                else {
+
+                    addField(
+                        `q${index + 1}`,
+                        ""
+                    );
+                }
+
+            });
+
+
+
+            /* =====================================================
+               اضافه کردن فرم به صفحه
+            ===================================================== */
+
+            document
+                .body
+                .appendChild(submitForm);
+
+
+
+            /* =====================================================
+               ارسال اطلاعات
+            ===================================================== */
+
+            submitForm.submit();
+
+
+
+            /*
+             * بعد از ارسال، فرم موقت را حذف می‌کنیم.
+             */
+
+            submitForm.remove();
+
+
+            console.log(
+                "✅ نتیجه با موفقیت به Google Sheets ارسال شد."
+            );
+
         }
 
     </script>
 
 </body>
+
 </html>
