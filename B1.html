@@ -1,0 +1,1793 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>آزمون سطح B1 | گویش ملل</title>
+
+    <!-- ================= فونت ================= -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;900&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- ================= CSS ================= -->
+    <style>
+        /* =========================================================
+           تنظیمات عمومی
+        ========================================================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Vazirmatn", sans-serif;
+        }
+
+        body {
+            background: #FFF8F0;
+            color: #333;
+            line-height: 1.8;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+
+        /* =========================================================
+           صفحه اصلی آزمون
+        ========================================================= */
+
+        .test-page {
+            min-height: 100vh;
+            padding: 60px 20px 100px;
+
+            position: relative;
+            overflow: hidden;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+
+        /* ---------- دایره‌های تزئینی پس‌زمینه ---------- */
+
+        .test-page::before,
+        .test-page::after {
+            content: "";
+            position: absolute;
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        .test-page::before {
+            width: 480px;
+            height: 480px;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(142, 47, 168, .1),
+                    transparent 70%
+                );
+
+            top: -160px;
+            right: -160px;
+        }
+
+        .test-page::after {
+            width: 420px;
+            height: 420px;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(212, 175, 55, .14),
+                    transparent 70%
+                );
+
+            bottom: -140px;
+            left: -140px;
+        }
+
+
+        /* ---------- ظرف اصلی ---------- */
+
+        .test-wrapper {
+            position: relative;
+            z-index: 1;
+
+            width: 100%;
+            max-width: 700px;
+        }
+
+
+        /* =========================================================
+           کارت‌های آزمون
+        ========================================================= */
+
+        .start-card,
+        .quiz-card,
+        .result-card {
+            background: white;
+
+            border-radius: 26px;
+
+            padding: 55px 45px;
+
+            box-shadow:
+                0 25px 60px rgba(142, 47, 168, .15);
+        }
+
+        .start-card,
+        .result-card {
+            text-align: center;
+        }
+
+
+        /* =========================================================
+           صفحه شروع
+        ========================================================= */
+
+        .start-icon,
+        .result-icon {
+            font-size: 52px;
+            margin-bottom: 18px;
+        }
+
+        .start-card h1 {
+            font-size: 28px;
+            font-weight: 900;
+
+            color: #3a1046;
+
+            margin-bottom: 14px;
+        }
+
+        .start-card h1 span {
+            color: #8E2FA8;
+        }
+
+        .start-card p {
+            color: #777;
+            font-size: 15px;
+
+            max-width: 520px;
+
+            margin: 0 auto 30px;
+        }
+
+
+        /* ---------- اطلاعات آزمون ---------- */
+
+        .start-meta {
+            display: flex;
+            justify-content: center;
+
+            gap: 30px;
+
+            margin-bottom: 30px;
+
+            flex-wrap: wrap;
+        }
+
+        .start-meta div {
+            text-align: center;
+        }
+
+        .start-meta b {
+            display: block;
+
+            font-size: 20px;
+
+            color: #8E2FA8;
+
+            font-weight: 900;
+        }
+
+        .start-meta span {
+            font-size: 12.5px;
+            color: #999;
+        }
+
+
+        /* =========================================================
+           فیلد نام
+        ========================================================= */
+
+        .name-field {
+            margin-bottom: 28px;
+            text-align: right;
+        }
+
+        .name-field label {
+            display: block;
+
+            font-size: 14px;
+            font-weight: 700;
+
+            color: #3a1046;
+
+            margin-bottom: 8px;
+        }
+
+        .name-field input {
+            width: 100%;
+
+            padding: 14px 18px;
+
+            border: 2px solid #eee;
+            border-radius: 14px;
+
+            font-family: inherit;
+            font-size: 15px;
+
+            transition: .25s;
+
+            outline: none;
+        }
+
+        .name-field input:focus {
+            border-color: #8E2FA8;
+
+            background:
+                rgba(142, 47, 168, .03);
+        }
+
+        .name-error {
+            color: #c63c3c;
+
+            font-size: 13px;
+
+            margin-top: 6px;
+
+            display: none;
+        }
+
+
+        /* =========================================================
+           دکمه شروع
+        ========================================================= */
+
+        .btn-start {
+            display: inline-block;
+
+            border: none;
+            cursor: pointer;
+
+            font-family: inherit;
+
+            padding: 16px 50px;
+
+            background: #8E2FA8;
+            color: white;
+
+            border-radius: 40px;
+
+            font-size: 15.5px;
+            font-weight: 700;
+
+            transition: .3s;
+        }
+
+        .btn-start:hover {
+            background: #D4AF37;
+
+            transform: translateY(-4px);
+
+            box-shadow:
+                0 12px 25px rgba(212, 175, 55, .35);
+        }
+
+        .btn-start:disabled {
+            opacity: .5;
+
+            cursor: not-allowed;
+
+            transform: none;
+
+            background: #8E2FA8;
+
+            box-shadow: none;
+        }
+
+
+        /* =========================================================
+           نوار پیشرفت آزمون
+        ========================================================= */
+
+        .progress-info {
+            display: flex;
+
+            justify-content: space-between;
+            align-items: center;
+
+            margin-bottom: 12px;
+
+            font-size: 13px;
+
+            color: #8E2FA8;
+
+            font-weight: 700;
+        }
+
+        .progress-track {
+            width: 100%;
+            height: 8px;
+
+            background: #f1e6f5;
+
+            border-radius: 10px;
+
+            overflow: hidden;
+
+            margin-bottom: 30px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            width: 5%;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #8E2FA8,
+                    #D4AF37
+                );
+
+            border-radius: 10px;
+
+            transition: width .4s ease;
+        }
+
+
+        /* =========================================================
+           نوع سؤال
+        ========================================================= */
+
+        .q-topic {
+            display: inline-block;
+
+            font-size: 11.5px;
+            font-weight: 700;
+
+            padding: 4px 14px;
+
+            border-radius: 20px;
+
+            margin-bottom: 10px;
+
+            background: rgba(142, 47, 168, .1);
+            color: #8E2FA8;
+        }
+
+
+        /* =========================================================
+           سطح سختی سؤال
+        ========================================================= */
+
+        .q-difficulty {
+            display: inline-block;
+
+            font-size: 11.5px;
+            font-weight: 700;
+
+            padding: 4px 14px;
+
+            border-radius: 20px;
+
+            margin-bottom: 16px;
+        }
+
+        .q-difficulty.easy {
+            background: rgba(46, 160, 90, .12);
+            color: #2ea05a;
+        }
+
+        .q-difficulty.medium {
+            background: rgba(212, 175, 55, .15);
+            color: #a3821c;
+        }
+
+        .q-difficulty.hard {
+            background: rgba(198, 60, 60, .1);
+            color: #c63c3c;
+        }
+
+
+        /* =========================================================
+           متن سؤال
+        ========================================================= */
+
+        .q-text {
+            font-size: 19px;
+
+            font-weight: 700;
+
+            color: #3a1046;
+
+            margin-bottom: 26px;
+
+            min-height: 60px;
+
+            direction: ltr;
+            text-align: left;
+        }
+
+
+        /* =========================================================
+           متن فارسی راهنما
+        ========================================================= */
+
+        .q-instruction {
+            color: #888;
+            font-size: 12.5px;
+            margin: -14px 0 20px;
+            text-align: right;
+        }
+
+
+        /* =========================================================
+           گزینه‌های سؤال
+        ========================================================= */
+
+        .q-options {
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 12px;
+
+            margin-bottom: 34px;
+        }
+
+        .q-option {
+            display: flex;
+
+            align-items: center;
+
+            gap: 14px;
+
+            border: 2px solid #eee;
+
+            border-radius: 14px;
+
+            padding: 14px 18px;
+
+            cursor: pointer;
+
+            transition: .25s;
+
+            font-size: 14.5px;
+
+            text-align: left;
+            direction: ltr;
+        }
+
+        .q-option:hover {
+            border-color: #D4AF37;
+
+            background:
+                rgba(212, 175, 55, .05);
+        }
+
+        .q-option.selected {
+            border-color: #8E2FA8;
+
+            background:
+                rgba(142, 47, 168, .06);
+        }
+
+
+        /* ---------- دایره A/B/C/D ---------- */
+
+        .q-option .letter {
+            width: 28px;
+            height: 28px;
+
+            min-width: 28px;
+
+            border-radius: 50%;
+
+            background: #f1e6f5;
+
+            color: #8E2FA8;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            font-weight: 700;
+
+            font-size: 13px;
+
+            transition: .25s;
+        }
+
+        .q-option.selected .letter {
+            background: #8E2FA8;
+
+            color: white;
+        }
+
+
+        /* =========================================================
+           دکمه‌های جابه‌جایی سؤال
+        ========================================================= */
+
+        .quiz-nav {
+            display: flex;
+
+            justify-content: space-between;
+
+            gap: 14px;
+        }
+
+        .quiz-nav button {
+            flex: 1;
+
+            border: none;
+
+            cursor: pointer;
+
+            font-family: inherit;
+
+            padding: 14px;
+
+            border-radius: 14px;
+
+            font-size: 14.5px;
+
+            font-weight: 700;
+
+            transition: .3s;
+        }
+
+        .btn-prev {
+            background: #f4f4f4;
+            color: #666;
+        }
+
+        .btn-prev:hover {
+            background: #eaeaea;
+        }
+
+        .btn-prev:disabled {
+            opacity: .4;
+
+            cursor: not-allowed;
+        }
+
+        .btn-next {
+            background: #8E2FA8;
+            color: white;
+        }
+
+        .btn-next:hover:not(:disabled) {
+            background: #D4AF37;
+        }
+
+        .btn-next:disabled {
+            opacity: .45;
+
+            cursor: not-allowed;
+        }
+
+
+        /* =========================================================
+           صفحه نتیجه
+        ========================================================= */
+
+        .result-card h2 {
+            font-size: 24px;
+
+            font-weight: 900;
+
+            color: #3a1046;
+
+            margin-bottom: 10px;
+        }
+
+        .result-card p {
+            color: #888;
+
+            font-size: 14.5px;
+
+            margin-bottom: 28px;
+        }
+
+        .result-score {
+            display: inline-block;
+
+            background:
+                rgba(142, 47, 168, .08);
+
+            color: #8E2FA8;
+
+            font-weight: 800;
+
+            font-size: 22px;
+
+            padding: 14px 36px;
+
+            border-radius: 20px;
+
+            margin-bottom: 10px;
+        }
+
+        .result-level {
+            display: inline-block;
+
+            background:
+                rgba(212, 175, 55, .15);
+
+            color: #a3821c;
+
+            font-weight: 800;
+
+            font-size: 15px;
+
+            padding: 8px 22px;
+
+            border-radius: 20px;
+
+            margin-bottom: 10px;
+        }
+
+        .result-note {
+            margin-top: 18px;
+            color: #777;
+            font-size: 13px;
+        }
+
+
+        /* =========================================================
+           کلاس مخفی
+        ========================================================= */
+
+        .hidden {
+            display: none !important;
+        }
+
+
+        /* =========================================================
+           نسخه موبایل
+        ========================================================= */
+
+        @media (max-width: 600px) {
+
+            .test-page {
+                padding: 30px 12px 60px;
+            }
+
+            .start-card,
+            .quiz-card,
+            .result-card {
+                padding: 34px 20px;
+                border-radius: 20px;
+            }
+
+            .start-card h1 {
+                font-size: 23px;
+            }
+
+            .q-text {
+                font-size: 17px;
+            }
+
+            .q-option {
+                padding: 12px 13px;
+                font-size: 13.5px;
+            }
+
+            .start-meta {
+                gap: 18px;
+            }
+
+            .quiz-nav {
+                flex-direction: column-reverse;
+            }
+        }
+    </style>
+
+</head>
+
+
+<body>
+
+    <!-- =========================================================
+         iframe مخفی
+
+         برای ارسال اطلاعات به Google Apps Script استفاده می‌شود.
+         ========================================================= -->
+
+    <iframe
+        name="googleSheetFrame"
+        id="googleSheetFrame"
+        style="display:none;">
+    </iframe>
+
+
+    <!-- =========================================================
+         صفحه اصلی آزمون
+    ========================================================= -->
+
+    <section class="test-page">
+
+        <div class="test-wrapper">
+
+
+            <!-- =====================================================
+                 مرحله ۱: صفحه شروع
+            ===================================================== -->
+
+            <div class="start-card" id="startScreen">
+
+                <div class="start-icon">
+                    🎯
+                </div>
+
+                <h1>
+                    آزمون سطح <span>B1</span>
+                </h1>
+
+                <p>
+                    این آزمون برای سنجش مهارت‌های زبان انگلیسی در سطح B1 طراحی شده است.
+                    سؤال‌ها موضوعاتی مانند گرامر، واژگان، کاربرد زبان و درک مطلب را پوشش می‌دهند.
+                </p>
+
+
+                <!-- ---------- اطلاعات آزمون ---------- -->
+
+                <div class="start-meta">
+
+                    <div>
+                        <b>۲۰</b>
+                        <span>سوال</span>
+                    </div>
+
+                    <div>
+                        <b>~۱۲</b>
+                        <span>دقیقه</span>
+                    </div>
+
+                    <div>
+                        <b>B1</b>
+                        <span>سطح هدف</span>
+                    </div>
+
+                    <div>
+                        <b>۴</b>
+                        <span>گزینه هر سوال</span>
+                    </div>
+
+                </div>
+
+
+                <!-- ---------- نام کاربر ---------- -->
+
+                <div class="name-field">
+
+                    <label for="userName">
+                        نام خود را وارد کنید:
+                    </label>
+
+                    <input
+                        type="text"
+                        id="userName"
+                        placeholder="مثلاً: Ali"
+                        autocomplete="off"
+                    >
+
+                    <div
+                        class="name-error"
+                        id="nameError"
+                    >
+                        لطفاً نام خود را وارد کنید.
+                    </div>
+
+                </div>
+
+
+                <!-- ---------- شروع آزمون ---------- -->
+
+                <button
+                    class="btn-start"
+                    id="btnStart"
+                    onclick="startTest()"
+                    disabled
+                >
+                    شروع آزمون B1
+                </button>
+
+            </div>
+
+
+
+            <!-- =====================================================
+                 مرحله ۲: آزمون
+            ===================================================== -->
+
+            <div
+                class="quiz-card hidden"
+                id="quizScreen"
+            >
+
+                <!-- ---------- اطلاعات پیشرفت ---------- -->
+
+                <div class="progress-info">
+
+                    <span id="progressLabel">
+                        سوال ۱ از ۲۰
+                    </span>
+
+                    <span id="progressPercent">
+                        ۵٪
+                    </span>
+
+                </div>
+
+
+                <!-- ---------- نوار پیشرفت ---------- -->
+
+                <div class="progress-track">
+
+                    <div
+                        class="progress-fill"
+                        id="progressFill"
+                    ></div>
+
+                </div>
+
+
+                <!-- ---------- موضوع سؤال ---------- -->
+
+                <span
+                    class="q-topic"
+                    id="qTopic"
+                >
+                    Grammar
+                </span>
+
+                <br>
+
+                <!-- ---------- سختی سؤال ---------- -->
+
+                <span
+                    class="q-difficulty"
+                    id="qDifficulty"
+                >
+                    متوسط
+                </span>
+
+
+                <!-- ---------- متن سؤال ---------- -->
+
+                <div
+                    class="q-text"
+                    id="qText"
+                ></div>
+
+                <div
+                    class="q-instruction"
+                    id="qInstruction"
+                ></div>
+
+
+                <!-- ---------- گزینه‌ها ---------- -->
+
+                <div
+                    class="q-options"
+                    id="qOptions"
+                ></div>
+
+
+                <!-- ---------- دکمه‌های جابه‌جایی ---------- -->
+
+                <div class="quiz-nav">
+
+                    <button
+                        class="btn-prev"
+                        id="btnPrev"
+                        onclick="prevQuestion()"
+                    >
+                        سوال قبل
+                    </button>
+
+                    <button
+                        class="btn-next"
+                        id="btnNext"
+                        onclick="nextQuestion()"
+                        disabled
+                    >
+                        سوال بعد
+                    </button>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =====================================================
+                 مرحله ۳: نتیجه
+            ===================================================== -->
+
+            <div
+                class="result-card hidden"
+                id="resultScreen"
+            >
+
+                <div class="result-icon">
+                    🎯
+                </div>
+
+                <h2>
+                    آزمون B1 با موفقیت تکمیل شد
+                </h2>
+
+                <p id="resultGreeting">
+                    نتیجه شما در حال پردازشه...
+                </p>
+
+                <div
+                    class="result-score"
+                    id="resultScore"
+                >
+                    ۰ از ۱۰۰
+                </div>
+
+                <br>
+
+                <div
+                    class="result-level"
+                    id="resultLevel"
+                >
+                    سطح: --
+                </div>
+
+                <div
+                    class="result-note"
+                    id="resultNote"
+                ></div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================================
+         JavaScript
+    ========================================================= -->
+
+    <script>
+
+        /* =========================================================
+           آدرس Google Apps Script
+
+           این آدرس را با همان Web App فعلی قرار داده‌ایم.
+           اگر می‌خواهی نتایج B1 در Sheet جداگانه ذخیره شوند،
+           فقط URL را با Web App مربوط به آن Sheet عوض کن.
+        ========================================================= */
+
+        const GOOGLE_SHEET_URL =
+            "https://script.google.com/macros/s/AKfycbxm-x4wdNtRLDn7i4uWONCTR4-oXltWjLgNkAPubzTwvC-JZmH5drbWMSE_tq7EHdWB/exec";
+
+
+        /* =========================================================
+           سؤالات آزمون B1
+
+           پوشش:
+           - Present Perfect
+           - Past Simple / Past Continuous
+           - Present Perfect Continuous
+           - Future forms
+           - First / Second Conditional
+           - Modals
+           - Passive
+           - Relative clauses
+           - Gerunds / infinitives
+           - Comparatives
+           - Quantifiers
+           - Reported speech
+           - Vocabulary
+           - Phrasal verbs
+           - Reading / Context
+        ========================================================= */
+
+        const questions = [
+
+            {
+                topic: "Grammar",
+                difficulty: "easy",
+                text: "I ___ this book twice, so I don't want to read it again.",
+                instruction: "",
+                options: ["read", "have read", "am reading", "was reading"],
+                correct: 1
+            },
+
+            {
+                topic: "Grammar",
+                difficulty: "easy",
+                text: "When I arrived at the station, the train ___.",
+                instruction: "",
+                options: ["left", "has left", "had left", "leaves"],
+                correct: 2
+            },
+
+            {
+                topic: "Grammar",
+                difficulty: "medium",
+                text: "She ___ English for three years, and she can communicate quite well now.",
+                instruction: "",
+                options: ["studies", "studied", "has been studying", "is studied"],
+                correct: 2
+            },
+
+            {
+                topic: "Grammar",
+                difficulty: "medium",
+                text: "Look at those dark clouds! It ___ rain.",
+                instruction: "",
+                options: ["will", "is going to", "would", "has"],
+                correct: 1
+            },
+
+            {
+                topic: "Grammar",
+                difficulty: "medium",
+                text: "If I have enough money next month, I ___ a new laptop.",
+                instruction: "",
+                options: ["buy", "bought", "will buy", "would buy"],
+                correct: 2
+            },
+
+            {
+                topic: "Grammar",
+                difficulty: "medium",
+                text: "If I ___ more free time, I would learn another language.",
+                instruction: "",
+                options: ["have", "had", "will have", "am having"],
+                correct: 1
+            },
+
+            {
+                topic: "Grammar",
+                difficulty: "medium",
+                text: "You ___ wear a seat belt when you are in a car.",
+                instruction: "",
+                options: ["should", "must", "might", "could"],
+                correct: 1
+            },
+
+            {
+                topic: "Grammar",
+                difficulty: "medium",
+                text: "The new shopping center ___ last year.",
+                instruction: "",
+                options: ["built", "was built", "has built", "is building"],
+                correct: 1
+            },
+
+            {
+                topic: "Grammar",
+                difficulty: "medium",
+                text: "That's the woman ___ son won the competition.",
+                instruction: "",
+                options: ["who", "which", "whose", "where"],
+                correct: 2
+            },
+
+            {
+                topic: "Grammar",
+                difficulty: "medium",
+                text: "I enjoy ___ to music when I am studying.",
+                instruction: "",
+                options: ["listen", "to listen", "listening", "listened"],
+                correct: 2
+            },
+
+            {
+                topic: "Grammar",
+                difficulty: "medium",
+                text: "This exercise is ___ than the previous one.",
+                instruction: "",
+                options: ["more difficult", "most difficult", "difficult", "the difficult"],
+                correct: 0
+            },
+
+            {
+                topic: "Grammar",
+                difficulty: "medium",
+                text: "There isn't ___ milk left in the fridge.",
+                instruction: "",
+                options: ["many", "much", "a few", "several"],
+                correct: 1
+            },
+
+            {
+                topic: "Reported Speech",
+                difficulty: "hard",
+                text: "Tom said that he ___ tired and wanted to go home.",
+                instruction: "",
+                options: ["is", "was", "has been", "will be"],
+                correct: 1
+            },
+
+            {
+                topic: "Vocabulary",
+                difficulty: "medium",
+                text: "I need to ___ my old computer because it doesn't work properly anymore.",
+                instruction: "",
+                options: ["turn off", "replace", "look after", "give up"],
+                correct: 1
+            },
+
+            {
+                topic: "Vocabulary",
+                difficulty: "medium",
+                text: "My brother is very good ___ fixing computers.",
+                instruction: "",
+                options: ["in", "on", "at", "for"],
+                correct: 2
+            },
+
+            {
+                topic: "Vocabulary",
+                difficulty: "medium",
+                text: "We missed the bus, so we had to ___ a taxi.",
+                instruction: "",
+                options: ["take", "do", "make", "catch"],
+                correct: 0
+            },
+
+            {
+                topic: "Reading",
+                difficulty: "medium",
+                text: "Sarah started working from home six months ago. At first, she found it difficult to organize her time, but now she enjoys having a more flexible schedule. She says she is more productive in the morning because there are fewer distractions.",
+                instruction: "According to the text, why does Sarah feel more productive in the morning?",
+                options: [
+                    "She has more meetings.",
+                    "She works longer hours.",
+                    "There are fewer distractions.",
+                    "She starts work later."
+                ],
+                correct: 2
+            },
+
+            {
+                topic: "Reading",
+                difficulty: "hard",
+                text: "Last summer, Daniel wanted to travel abroad, but he didn't have enough money. Instead, he found a part-time job at a local restaurant. After three months, he had saved enough money to travel. He now believes that working before a trip helped him appreciate the experience more.",
+                instruction: "What did Daniel do before traveling?",
+                options: [
+                    "He borrowed money from his friends.",
+                    "He worked part-time.",
+                    "He stayed at home.",
+                    "He bought a new car."
+                ],
+                correct: 1
+            },
+
+            {
+                topic: "Vocabulary",
+                difficulty: "hard",
+                text: "The meeting was ___ because the manager was sick.",
+                instruction: "Choose the word that best completes the sentence.",
+                options: ["put off", "looked after", "picked up", "turned on"],
+                correct: 0
+            },
+
+            {
+                topic: "Grammar",
+                difficulty: "hard",
+                text: "By the time we got home, our parents ___ dinner.",
+                instruction: "",
+                options: ["finish", "have finished", "had finished", "are finishing"],
+                correct: 2
+            },
+
+            {
+                topic: "Grammar",
+                difficulty: "hard",
+                text: "I have lived in this city ___ 2022.",
+                instruction: "",
+                options: ["for", "since", "during", "from"],
+                correct: 1
+            }
+
+        ];
+
+
+        /* =========================================================
+           متغیرهای اصلی آزمون
+        ========================================================= */
+
+        let currentIndex = 0;
+
+        let userAnswers =
+            new Array(questions.length).fill(null);
+
+        let userName = "";
+
+
+        /* =========================================================
+           ترجمه موضوع سؤال
+        ========================================================= */
+
+        const topicLabels = {
+            "Grammar": "گرامر",
+            "Vocabulary": "واژگان",
+            "Reading": "درک مطلب",
+            "Reported Speech": "Reported Speech"
+        };
+
+
+        /* =========================================================
+           ترجمه سطح سختی سؤال
+        ========================================================= */
+
+        const difficultyLabels = {
+            easy: "آسان",
+            medium: "متوسط",
+            hard: "چالشی"
+        };
+
+
+        /* =========================================================
+           حروف گزینه‌ها
+        ========================================================= */
+
+        const answerLetters = [
+            "A",
+            "B",
+            "C",
+            "D"
+        ];
+
+
+        /* =========================================================
+           فعال / غیرفعال کردن دکمه شروع
+        ========================================================= */
+
+        document
+            .getElementById("userName")
+            .addEventListener("input", function () {
+
+                const value =
+                    this.value.trim();
+
+                const startButton =
+                    document.getElementById("btnStart");
+
+                const nameError =
+                    document.getElementById("nameError");
+
+                startButton.disabled =
+                    value.length < 2;
+
+                nameError.style.display =
+                    "none";
+            });
+
+
+        /* =========================================================
+           شروع آزمون
+        ========================================================= */
+
+        function startTest() {
+
+            userName =
+                document
+                    .getElementById("userName")
+                    .value
+                    .trim();
+
+
+            if (userName.length < 2) {
+
+                document
+                    .getElementById("nameError")
+                    .style.display = "block";
+
+                return;
+            }
+
+
+            document
+                .getElementById("startScreen")
+                .classList
+                .add("hidden");
+
+
+            document
+                .getElementById("quizScreen")
+                .classList
+                .remove("hidden");
+
+
+            renderQuestion();
+        }
+
+
+        /* =========================================================
+           نمایش سؤال فعلی
+        ========================================================= */
+
+        function renderQuestion() {
+
+            const question =
+                questions[currentIndex];
+
+
+            const percent =
+                Math.round(
+                    ((currentIndex + 1) / questions.length) * 100
+                );
+
+
+            document
+                .getElementById("progressFill")
+                .style.width =
+                percent + "%";
+
+
+            document
+                .getElementById("progressPercent")
+                .textContent =
+                percent + "٪";
+
+
+            document
+                .getElementById("progressLabel")
+                .textContent =
+                `سوال ${currentIndex + 1} از ${questions.length}`;
+
+
+            /* ---------- موضوع ---------- */
+
+            document
+                .getElementById("qTopic")
+                .textContent =
+                topicLabels[question.topic] || question.topic;
+
+
+            /* ---------- سختی ---------- */
+
+            const difficultyElement =
+                document.getElementById("qDifficulty");
+
+            difficultyElement.textContent =
+                difficultyLabels[question.difficulty];
+
+            difficultyElement.className =
+                "q-difficulty " +
+                question.difficulty;
+
+
+            /* ---------- متن سؤال ---------- */
+
+            document
+                .getElementById("qText")
+                .textContent =
+                question.text;
+
+
+            /* ---------- توضیح فارسی سؤال ---------- */
+
+            document
+                .getElementById("qInstruction")
+                .textContent =
+                question.instruction;
+
+
+            /* ---------- ساخت گزینه‌ها ---------- */
+
+            const optionsElement =
+                document.getElementById("qOptions");
+
+
+            optionsElement.innerHTML =
+                question.options
+                    .map((option, index) => {
+
+                        const selected =
+                            userAnswers[currentIndex] === index
+                                ? "selected"
+                                : "";
+
+
+                        return `
+                            <div
+                                class="q-option ${selected}"
+                                onclick="selectOption(${index})"
+                            >
+
+                                <span class="letter">
+                                    ${answerLetters[index]}
+                                </span>
+
+                                <span>
+                                    ${option}
+                                </span>
+
+                            </div>
+                        `;
+
+                    })
+                    .join("");
+
+
+            /* ---------- دکمه سؤال قبل ---------- */
+
+            document
+                .getElementById("btnPrev")
+                .disabled =
+                currentIndex === 0;
+
+
+            /* ---------- دکمه سؤال بعد ---------- */
+
+            const nextButton =
+                document.getElementById("btnNext");
+
+
+            nextButton.disabled =
+                userAnswers[currentIndex] === null;
+
+
+            nextButton.textContent =
+                currentIndex === questions.length - 1
+                    ? "مشاهده نتیجه"
+                    : "سوال بعد";
+        }
+
+
+        /* =========================================================
+           انتخاب گزینه
+        ========================================================= */
+
+        function selectOption(index) {
+
+            userAnswers[currentIndex] =
+                index;
+
+            renderQuestion();
+        }
+
+
+        /* =========================================================
+           رفتن به سؤال بعد
+        ========================================================= */
+
+        function nextQuestion() {
+
+            if (userAnswers[currentIndex] === null) {
+                return;
+            }
+
+
+            if (currentIndex < questions.length - 1) {
+
+                currentIndex++;
+
+                renderQuestion();
+
+            }
+
+            else {
+
+                finishTest();
+            }
+        }
+
+
+        /* =========================================================
+           برگشت به سؤال قبل
+        ========================================================= */
+
+        function prevQuestion() {
+
+            if (currentIndex > 0) {
+
+                currentIndex--;
+
+                renderQuestion();
+            }
+        }
+
+
+        /* =========================================================
+           تعیین نتیجه آزمون B1
+
+           توجه:
+           این آزمون B1-focused است.
+           بنابراین نتیجه بیشتر نشان‌دهنده میزان آمادگی
+           کاربر برای مباحث سطح B1 است، نه تعیین CEFR رسمی.
+        ========================================================= */
+
+        function calculateLevel(score100) {
+
+            if (score100 >= 80) {
+                return "B1 – Strong";
+            }
+
+            if (score100 >= 60) {
+                return "B1 – Developing";
+            }
+
+            if (score100 >= 40) {
+                return "A2 / B1 Borderline";
+            }
+
+            return "Below B1";
+        }
+
+
+        /* =========================================================
+           متن توضیح نتیجه
+        ========================================================= */
+
+        function getResultNote(score100) {
+
+            if (score100 >= 80) {
+                return "عملکرد شما در این آزمون با بیشتر مباحث هدف سطح B1 هماهنگ بود.";
+            }
+
+            if (score100 >= 60) {
+                return "بخش قابل‌توجهی از مباحث B1 را می‌شناسید، اما بعضی موضوعات هنوز نیاز به تمرین دارند.";
+            }
+
+            if (score100 >= 40) {
+                return "برخی مباحث B1 را می‌شناسید، اما بهتر است ابتدا نقاط ضعف خود را تقویت کنید.";
+            }
+
+            return "برای رسیدن به سطح B1 بهتر است ابتدا مباحث پایه و A2 را مرور و سپس دوباره این آزمون را امتحان کنید.";
+        }
+
+
+        /* =========================================================
+           پایان آزمون
+        ========================================================= */
+
+        function finishTest() {
+
+            /* ---------- محاسبه تعداد پاسخ‌های صحیح ---------- */
+
+            let correctCount = 0;
+
+
+            questions.forEach((question, index) => {
+
+                if (
+                    userAnswers[index] ===
+                    question.correct
+                ) {
+
+                    correctCount++;
+                }
+
+            });
+
+
+            /* ---------- نمره از 100 ---------- */
+
+            const score100 =
+                Math.round(
+                    (correctCount / questions.length) * 100
+                );
+
+
+            /* ---------- تعیین سطح ---------- */
+
+            const level =
+                calculateLevel(score100);
+
+
+            /* ---------- نمایش نتیجه ---------- */
+
+            document
+                .getElementById("quizScreen")
+                .classList
+                .add("hidden");
+
+
+            document
+                .getElementById("resultScreen")
+                .classList
+                .remove("hidden");
+
+
+            document
+                .getElementById("resultGreeting")
+                .textContent =
+                `${userName} عزیز، نتیجه آزمون B1 شما آماده است:`;
+
+
+            document
+                .getElementById("resultScore")
+                .textContent =
+                `${score100} از ۱۰۰`;
+
+
+            document
+                .getElementById("resultLevel")
+                .textContent =
+                `نتیجه: ${level}`;
+
+
+            document
+                .getElementById("resultNote")
+                .textContent =
+                getResultNote(score100);
+
+
+            /* =====================================================
+               ارسال اطلاعات به Google Sheets
+
+               ستون‌های پیشنهادی Sheet:
+
+               name
+               test
+               score
+               level
+               q1
+               q2
+               ...
+               q20
+               submittedAt
+            ===================================================== */
+
+
+            const submitForm =
+                document.createElement("form");
+
+
+            submitForm.method =
+                "POST";
+
+
+            submitForm.action =
+                GOOGLE_SHEET_URL;
+
+
+            submitForm.target =
+                "googleSheetFrame";
+
+
+            submitForm.style.display =
+                "none";
+
+
+            /* ---------- تابع ساخت فیلد مخفی ---------- */
+
+            function addField(name, value) {
+
+                const input =
+                    document.createElement("input");
+
+                input.type =
+                    "hidden";
+
+                input.name =
+                    name;
+
+                input.value =
+                    value;
+
+                submitForm.appendChild(input);
+            }
+
+
+            /* ---------- اطلاعات اصلی ---------- */
+
+            addField(
+                "name",
+                userName
+            );
+
+
+            addField(
+                "test",
+                "B1"
+            );
+
+
+            addField(
+                "score",
+                score100
+            );
+
+
+            addField(
+                "level",
+                level
+            );
+
+
+            addField(
+                "correctCount",
+                correctCount
+            );
+
+
+            /* ---------- پاسخ‌های سؤال‌ها ---------- */
+
+            questions.forEach((question, index) => {
+
+                const selectedAnswer =
+                    userAnswers[index];
+
+
+                if (selectedAnswer !== null) {
+
+                    const answerText =
+                        `${answerLetters[selectedAnswer]} - ${question.options[selectedAnswer]}`;
+
+
+                    addField(
+                        `q${index + 1}`,
+                        answerText
+                    );
+
+                }
+
+                else {
+
+                    addField(
+                        `q${index + 1}`,
+                        ""
+                    );
+                }
+
+            });
+
+
+            /* ---------- زمان ثبت ---------- */
+
+            addField(
+                "submittedAt",
+                new Date().toISOString()
+            );
+
+
+            /* ---------- ارسال ---------- */
+
+            document
+                .body
+                .appendChild(submitForm);
+
+
+            submitForm.submit();
+
+
+            /* ---------- حذف فرم موقت ---------- */
+
+            setTimeout(() => {
+                submitForm.remove();
+            }, 1000);
+
+
+            console.log(
+                "✅ نتیجه آزمون B1 ارسال شد."
+            );
+        }
+
+    </script>
+
+</body>
+
+</html>
