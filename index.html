@@ -259,8 +259,15 @@
 
 
         /* =========================================================
-           دکمه شروع
+           دکمه‌های شروع (بازآزمون اصلی + لینک‌ها به آزمون‌های دیگر)
         ========================================================= */
+
+        .start-actions {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 14px;
+        }
 
         .btn-start {
             display: inline-block;
@@ -281,6 +288,11 @@
             font-weight: 700;
 
             transition: .3s;
+
+            text-decoration: none;
+
+            width: 100%;
+            max-width: 260px;
         }
 
         .btn-start:hover {
@@ -301,6 +313,20 @@
 
             background: #8E2FA8;
 
+            box-shadow: none;
+        }
+
+        /* دکمه‌های ثانویه (لینک به آزمون سطح A و B1) */
+
+        .btn-secondary {
+            background: white;
+            color: #8E2FA8;
+            border: 2px solid #8E2FA8;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(142, 47, 168, .06);
+            color: #8E2FA8;
             box-shadow: none;
         }
 
@@ -737,19 +763,34 @@
                 </div>
 
 
-                <!-- ---------- شروع آزمون ---------- -->
+                <!-- ---------- دکمه‌های شروع و لینک به آزمون‌های سطح ---------- -->
 
-                <button
-                    class="btn-start"
-                    id="btnStart"
-                    onclick="startTest()"
-                    disabled
-                >
-                    شروع آزمون
-                </button>
+<div class="start-actions">
 
-            </div>
+    <button
+        class="btn-start"
+        id="btnStart"
+        onclick="startTest()"
+        disabled
+    >
+        شروع آزمون
+    </button>
 
+    
+    <a    href="A.html"
+        class="btn-start btn-secondary"
+    >
+        🎯 آزمون سطح A
+    </a>
+
+    
+    <a    href="B1.html"
+        class="btn-start btn-secondary"
+    >
+        🎯 آزمون سطح B1
+    </a>
+
+</div>
 
 
             <!-- =====================================================
